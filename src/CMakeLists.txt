@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 2.8)
 set(EXECUTABLE_OUTPUT_PATH "../")
-set(SOURCE_FILES )
+set(SOURCE_FILES qarrow.cpp)
 add_library(qarrow SHARED ${SOURCE_FILES})

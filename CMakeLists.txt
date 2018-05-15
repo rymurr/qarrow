@@ -1,14 +1,15 @@
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
+set(CMAKE_PREFIX_PATH "~/anaconda3/envs/arrow-dev")
 cmake_minimum_required(VERSION 2.8)
 project(qarrow)
 
-find_package(arrow REQUIRED)
-include(arrow)
+find_package(Arrow REQUIRED)
+
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 ADD_DEFINITIONS(-DBOOST_ALL_DYN_LINK)
-find_package(Boost 1.58.0 COMPONENTS log log_setup system thread timer prg_exec_monitor)
+find_package(Boost 1.66.0 COMPONENTS log log_setup system thread timer prg_exec_monitor)
 include_directories(${Boost_INCLUDE_DIRS})
 link_libraries(${Boost_LIBRARIES})
 
@@ -25,7 +26,7 @@ link_libraries()
 
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++11)
 
-add_exceutable(main main.cpp)
+add_executable(main main.cpp main.cpp tests/test.cpp src/qarrow.cpp)
 target_link_libraries(main qarrow)
 enable_testing()
 add_subdirectory(src)
