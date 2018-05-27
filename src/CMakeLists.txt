@@ -1,4 +1,15 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.5)
 set(EXECUTABLE_OUTPUT_PATH "../")
-set(SOURCE_FILES qarrow.cpp)
+set(SOURCE_FILES qarrow.cpp k.h)
 add_library(qarrow SHARED ${SOURCE_FILES})
+
+if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
+    target_compile_options( qarrow PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)
+endif()
+if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang" )
+    target_compile_options( qarrow PRIVATE -Wweak-vtables -Wexit-time-destructors -Wglobal-constructors -Wmissing-noreturn )
+endif()
+if ( CMAKE_CXX_COMPILER_ID MATCHES "MSVC" )
+    target_compile_options( qarrow PRIVATE /W4 /w44265 /w44061 /w44062 )
+endif()
+
