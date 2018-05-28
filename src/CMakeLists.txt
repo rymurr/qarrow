@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 set(EXECUTABLE_OUTPUT_PATH "../")
-set(SOURCE_FILES qarrow.cpp k.h)
+set(SOURCE_FILES qarrow.cpp qarrow.hpp k.h )
 add_library(qarrow SHARED ${SOURCE_FILES})
+target_link_libraries(qarrow ${CMAKE_SOURCE_DIR}/bin/c.o)
 
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
     target_compile_options( qarrow PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)

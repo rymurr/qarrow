@@ -18,10 +18,10 @@ typedef struct k0 {
         double f;
         char* s;
         struct k0 *k;
-        struct{
+        struct {
             long n;
             bool G0[1];
-        };
+        } v;
     };
 } *K;
 typedef struct {
