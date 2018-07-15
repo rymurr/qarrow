@@ -39,3 +39,23 @@ std::shared_ptr<ColumnBase> getBuilder(arrow::MemoryPool* pool, char* name, int 
             return std::shared_ptr<ColumnBase>();
     }
 }
+
+void print(std::shared_ptr<arrow::Table> table) {
+    std::ostream soutstream(std::cout.rdbuf());
+    print(std::move(table), &soutstream);
+}
+
+void print(std::shared_ptr<arrow::Table> table, std::ostream *stream) {
+    std::shared_ptr<arrow::Schema> schema = table->schema();
+    arrow::PrettyPrint(*schema, arrow::PrettyPrintOptions(), stream);
+    std::cout << std::endl;
+    for (int i=0; i<table->num_columns();i++) {
+        std::shared_ptr<arrow::Column> col = table->column(i);
+        for (int j=0;j<col->data()->num_chunks();j++) {
+            auto c = col->data()->chunk(j);
+            arrow::PrettyPrint(*c, 4, stream);
+        }
+        std::cout << std::endl;
+    }
+
+}

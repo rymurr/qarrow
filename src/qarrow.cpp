@@ -3,6 +3,7 @@
 #include "k.h"
 #include "column_types.hpp"
 #include "utils.hpp"
+#include "arrow/pretty_print.h"
 
 
 int QConnection::connect() {
@@ -44,9 +45,10 @@ std::shared_ptr<arrow::Table> QConnection::query(std::string query) {
         }
 
 
-        auto schema = std::make_shared<arrow::Schema>(schema_vector);
-
-        return arrow::Table::Make(schema, data_vector);
+        std::shared_ptr<arrow::Schema> schema = std::make_shared<arrow::Schema>(schema_vector);
+        auto table = arrow::Table::Make(schema, data_vector);
+        print(table);
+        return table;
     }
 
     return nullptr;
