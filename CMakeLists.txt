@@ -7,6 +7,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(qarrow)
 
 find_package(Arrow REQUIRED)
+include_directories(${ARROW_INCLUDE_DIR})
 
 ADD_DEFINITIONS(-D_GLIBCXX_USE_CXX11_ABI=0)
 set(Boost_USE_STATIC_LIBS OFF)
@@ -27,6 +28,7 @@ include_directories(src)
 
 
 add_executable(main main.cpp main.cpp tests/test.cpp src/qarrow.cpp)
+#set_target_properties(main PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
     target_compile_options( main PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)

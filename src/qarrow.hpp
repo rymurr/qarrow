@@ -3,6 +3,8 @@
 
 #include <string>
 #include <utility>
+#include "arrow/api.h"
+#include "column.hpp"
 
 
 class QConnection {
@@ -23,6 +25,8 @@ public:
 
     int connect();
     void close();
+    std::shared_ptr<arrow::Table> query(std::string query);
 };
+
 
 #endif

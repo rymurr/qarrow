@@ -21,7 +21,7 @@ typedef struct k0 {
         struct {
             long n;
             bool G0[1];
-        } v;
+        };
     };
 } *K;
 typedef struct {

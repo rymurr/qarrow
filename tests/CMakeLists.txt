@@ -4,7 +4,8 @@ include_directories(../src)
 #link_libraries(${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY} qarrow ${CMAKE_THREAD_LIBS_INIT})
 add_executable(arrowTest test.cpp)
 
-target_link_libraries(arrowTest ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} qarrow)
+target_link_libraries(arrowTest ${GTEST_LIBRARY} ${GTEST_MAIN_LIBRARY} ${CMAKE_THREAD_LIBS_INIT} ${ARROW_SHARED_LIB} qarrow)
+#set_target_properties(arrowTest PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
     target_compile_options( arrowTest PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)

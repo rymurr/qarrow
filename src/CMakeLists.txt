@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
 set(EXECUTABLE_OUTPUT_PATH "../")
-set(SOURCE_FILES qarrow.cpp qarrow.hpp k.h )
+set(SOURCE_FILES qarrow.cpp qarrow.hpp k.h column_types.cpp column_types.hpp utils.cpp utils.hpp column.hpp column.cpp)
 add_library(qarrow SHARED ${SOURCE_FILES})
-target_link_libraries(qarrow ${CMAKE_SOURCE_DIR}/bin/c.o)
-
+target_link_libraries(qarrow ${CMAKE_SOURCE_DIR}/bin/c.o ${ARROW_SHARED_LIB})
+#set_target_properties(qarrow PROPERTIES COMPILE_FLAGS "-m32" LINK_FLAGS "-m32")
 if ( CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang|GNU" )
     target_compile_options( qarrow PRIVATE -Wall -Wextra -Wunreachable-code -Wpedantic)
 endif()
